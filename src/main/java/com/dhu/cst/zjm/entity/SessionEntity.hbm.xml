@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.dhu.cst.zjm.entity.SessionEntity" table="Session" schema="encrypt">
+        <cache usage="read-write"/>
+        <id name="id">
+            <column name="ID" sql-type="varchar(45)" length="45"/>
+        </id>
+        <property name="time">
+            <column name="Time" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="userByUserID" class="com.dhu.cst.zjm.entity.UserEntity">
+            <column name="UserID" sql-type="int(11)"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

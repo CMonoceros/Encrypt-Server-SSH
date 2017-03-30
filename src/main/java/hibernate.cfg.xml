@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://115.159.73.148:3306/encrypt</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping class="com.dhu.cst.zjm.entity.EncryptTypeEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/EncryptTypeEntity.hbm.xml"/>
+        <mapping resource="com/dhu/cst/zjm/entity/UserEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.UserEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/AesEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.AesEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/DesEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.DesEntity"/>
+        <mapping class="com.dhu.cst.zjm.entity.EncryptRelationEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/EncryptRelationEntity.hbm.xml"/>
+        <mapping resource="com/dhu/cst/zjm/entity/FileEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.FileEntity"/>
+        <mapping class="com.dhu.cst.zjm.entity.Md5Entity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/Md5Entity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.RsaEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/RsaEntity.hbm.xml"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/EncryptTypeBaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.EncryptTypeBaseEntity"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.UserBaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/UserBaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.AesBaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/AesBaseEntity.hbm.xml"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/DesBaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.DesBaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/EncryptRelationBaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.EncryptRelationBaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/FileBaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.FileBaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/Md5BaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.Md5BaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/RsaBaseEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.RsaBaseEntity"/>
+        <mapping class="com.dhu.cst.zjm.entity.SessionEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/SessionEntity.hbm.xml"/>
+        <mapping class="com.dhu.cst.zjm.entity.base.SessionBaseEntity"/>
+        <mapping resource="com/dhu/cst/zjm/entity/base/SessionBaseEntity.hbm.xml"/>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 配置为开发模式 -->
+    <constant name="struts.devMode" value="true"></constant>
+    <!-- 扩展名配置为action -->
+    <constant name="struts.action.extension" value="action"></constant>
+    <!-- 把主题配置为simple -->
+    <constant name="struts.ui.theme" value="simple"/>
+
+    <constant name="struts.multipart.maxSize" value="4194304"/>
+    <constant name="struts.multipart.saveDir" value="C:/Code/JAVA/test/temp/"/>
+    <constant name="struts.multipart.parser" value="jakarta"/>
+
+    <package name="app" extends="struts-default" namespace="/App">
+
+        <action name="login" class="userAction" method="login">
+        </action>
+
+        <action name="register" class="userAction" method="register">
+        </action>
+
+        <action name="uploadFile" class="fileUploadAction" >
+            <interceptor-ref name="fileUpload">
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
+        <action name="downloadFile" class="fileDownloadAction" >
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">downloadFile</param>
+            </result>
+        </action>
+
+        <action name="getFileList" class="fileAction" method="getFileList">
+        </action>
+
+        <action name="getFileListByPaper" class="fileAction" method="getFileListByPaper">
+        </action>
+
+        <action name="getEncryptType" class="encryptTypeAction" method="getEncryptType">
+        </action>
+
+        <action name="encryptFile" class="encryptRelationAction" method="encryptFile">
+        </action>
+
+
+
+    </package>
+
+</struts>

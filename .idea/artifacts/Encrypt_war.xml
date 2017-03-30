@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Encrypt:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Final.war">
+      <element id="artifact" artifact-name="Encrypt:war exploded" />
+    </root>
+  </artifact>
+</component>

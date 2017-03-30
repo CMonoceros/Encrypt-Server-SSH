@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.dhu.cst.zjm.entity.EncryptRelationEntity" table="EncryptRelation" schema="encrypt">
+        <id name="id">
+            <column name="ID" sql-type="int(11)" unique="true"/>
+        </id>
+        <many-to-one name="fileByFileId" class="com.dhu.cst.zjm.entity.FileEntity">
+            <column name="FileID" sql-type="int(11)"/>
+        </many-to-one>
+        <many-to-one name="encryptTypeByTypeId" class="com.dhu.cst.zjm.entity.EncryptTypeEntity">
+            <column name="TypeID" sql-type="int(11)"/>
+        </many-to-one>
+        <set name="aesById" inverse="true">
+            <key>
+                <column name="RelationID" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.AesEntity"/>
+        </set>
+        <set name="desById" inverse="true">
+            <key>
+                <column name="RelationID" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.DesEntity"/>
+        </set>
+        <set name="md5sById" inverse="true">
+            <key>
+                <column name="RelationID" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.Md5Entity"/>
+        </set>
+        <set name="rsasById" inverse="true">
+            <key>
+                <column name="RelationID" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.RsaEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

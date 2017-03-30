@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.dhu.cst.zjm.entity.base.RsaBaseEntity" table="RSA" schema="encrypt">
+        <id name="id">
+            <column name="ID" sql-type="int(11)"/>
+        </id>
+        <property name="relationId">
+            <column name="RelationID" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="publicKey">
+            <column name="PublicKey" sql-type="longtext"/>
+        </property>
+        <property name="privateKey">
+            <column name="PrivateKey" sql-type="longtext"/>
+        </property>
+    </class>
+</hibernate-mapping>

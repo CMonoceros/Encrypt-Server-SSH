@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dhu.cst.zjm.entity.UserEntity" table="User" schema="encrypt">
+        <cache usage="read-write"/>
+        <id name="id">
+            <column name="ID" sql-type="int(11)" unique="true"/>
+        </id>
+        <property name="name">
+            <column name="Name" sql-type="varchar(16)" length="16"/>
+        </property>
+        <property name="password">
+            <column name="Password" sql-type="mediumtext"/>
+        </property>
+        <property name="registerTime">
+            <column name="RegisterTime" sql-type="datetime"/>
+        </property>
+        <property name="sex">
+            <column name="Sex" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <property name="tel">
+            <column name="Tel" sql-type="int(20)" not-null="true"/>
+        </property>
+        <property name="qq">
+            <column name="QQ" sql-type="int(15)" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="Email" sql-type="varchar(30)" length="30" not-null="true"/>
+        </property>
+        <property name="permission">
+            <column name="Permission" sql-type="int(2)" not-null="true"/>
+        </property>
+        <set name="filesById" inverse="true">
+            <key>
+                <column name="ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.FileEntity"/>
+        </set>
+        <set name="sessionById" inverse="true">
+            <key>
+                <column name="UserID"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.SessionEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>
