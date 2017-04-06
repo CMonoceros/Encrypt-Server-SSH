@@ -76,6 +76,14 @@ public class EncryptRelationAction extends BaseAction<EncryptRelationEntity> {
     }
 
     private void baseEncryptType(FileBaseEntity file, EncryptRelationBaseEntity relation) throws Exception {
+        String ownerEncryptPath = encryptPath + file.getOwner() + "/" + file.getName() + "/";
+        String ownerZipPath = zipPath + file.getOwner() + "/";
+        if (!(new File(ownerEncryptPath).exists())) {
+            new File(ownerEncryptPath).mkdirs();
+        }
+        if (!(new File(ownerZipPath).exists())) {
+            new File(ownerZipPath).mkdirs();
+        }
         String[] s = file.getName().split("\\.");
         Map<String, String> map = RSAUtil.genKeyPair();
         rsaService.saveRsaByRelationAndKey(relation.getId(), map.get("public"), map.get("private"));
@@ -84,27 +92,16 @@ public class EncryptRelationAction extends BaseAction<EncryptRelationEntity> {
         md5Service.saveMd5ByRelationAndSign(relation.getId(), hashSign);
 
         String signstr = RSASignature.sign(hashSign, map.get("private"));
-        writeToFile(encryptPath + file.getOwner() + "/" + "sign.sign", signstr);
-        writeToFile(encryptPath + file.getOwner() + "/" + "public.key", map.get("public"));
+        FileUtil.stringToFile(ownerEncryptPath + "sign.sign", signstr);
+        FileUtil.stringToFile(ownerEncryptPath + "public.key", map.get("public"));
         DesBaseEntity desBaseEntity = desService.findDesByRelationAndLayer(relation.getId(), 1);
 
         byte[] encrypt = DesUtil.encrypt(FileUtil.File2byte(file.getPath() + file.getName()), desBaseEntity.getDesKey().getBytes());
-        FileUtil.byte2File(encrypt, encryptPath + file.getOwner() + "/", s[0] + ".encrypt");
+        FileUtil.byte2File(encrypt, ownerEncryptPath, s[0] + ".encrypt");
 
-        ZipUtil.ZipEncrypt(encryptPath + file.getOwner() + "/",
-                zipPath + file.getOwner() + "/", s[0] + ".zip");
+        ZipUtil.ZipEncrypt(ownerEncryptPath,
+                ownerZipPath, s[0] + ".zip");
     }
 
-    private void writeToFile(String path, String sign) throws IOException {
-        File file=new File(path);
-        if(!file.exists()){
-            file.createNewFile();
-        }
-        FileWriter signFile = new FileWriter(path);
-        BufferedWriter signBW = new BufferedWriter(signFile);
-        signBW.write(sign);
-        signBW.flush();
-        signBW.close();
-        signFile.close();
-    }
+
 }

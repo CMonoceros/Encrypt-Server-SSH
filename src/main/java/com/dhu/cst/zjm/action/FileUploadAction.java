@@ -82,8 +82,16 @@ public class FileUploadAction extends BaseAction<FileEntity> {
 
     @Override
     public String execute() throws IOException {
+        System.out.println("innnn");
         for (int i = 0; i < file.size(); i++) {
-            File out = new File(savePath + owner + "/", fileFileName.get(i));
+            System.out.println("in");
+            String ownerSavePath=savePath + owner + "/";
+            File dir=new File(ownerSavePath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+                System.out.println("not null");
+            }
+            File out = new File(ownerSavePath, fileFileName.get(i));
             if (!out.exists()) {
                 try {
                     out.createNewFile();

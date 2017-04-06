@@ -24,7 +24,7 @@
         <action name="uploadFile" class="fileUploadAction" >
             <interceptor-ref name="fileUpload">
             </interceptor-ref>
-            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
 
         <action name="downloadFile" class="fileDownloadAction" >

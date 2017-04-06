@@ -235,4 +235,17 @@ public class FileUtil {
             }
         }
     }
+
+    public static void stringToFile(String path, String sign) throws IOException {
+        File file=new File(path);
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        FileWriter signFile = new FileWriter(path);
+        BufferedWriter signBW = new BufferedWriter(signFile);
+        signBW.write(sign);
+        signBW.flush();
+        signBW.close();
+        signFile.close();
+    }
 }
