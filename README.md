@@ -39,3 +39,7 @@ Controller中包含BaseUserService，继承BaseDaoSupport的User相关操作数�
 View为Android客户端。
 
 ![image](https://github.com/CMonoceros/Encrypt-Client-MVP/raw/master/screenshot/server_mvc.jpg)
+
+其它
+------
+其他内容，包括相关方法接口，见doc文件夹下开发报告
