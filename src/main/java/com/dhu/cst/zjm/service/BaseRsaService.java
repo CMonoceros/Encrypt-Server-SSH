@@ -11,4 +11,6 @@ public interface BaseRsaService extends BaseDaoSupport<RsaEntity>{
     RsaBaseEntity findRsaByRelation(int relationId);
 
     RsaBaseEntity saveRsaByRelationAndKey(int relationId,String publicKey,String privateKey);
+
+    RsaBaseEntity updateRsaByRelationAndKey(int id,int relationId,String publicKey,String privateKey);
 }

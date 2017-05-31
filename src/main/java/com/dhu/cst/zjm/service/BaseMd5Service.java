@@ -11,4 +11,6 @@ public interface BaseMd5Service extends BaseDaoSupport<Md5Entity> {
     Md5BaseEntity findMd5ByRelation(int relationId);
 
     Md5BaseEntity saveMd5ByRelationAndSign(int relationId,String sign);
+
+    Md5BaseEntity updateMd5ByRelationAndSign(int id,int relationId,String sign);
 }

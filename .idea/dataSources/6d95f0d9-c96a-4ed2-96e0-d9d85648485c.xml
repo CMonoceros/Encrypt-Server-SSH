@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="com.mysql.jdbc.Driver - jdbc:mysql://localhost:3306/encrypt">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="encrypt">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="sakila"/>
+    <schema id="6" name="sys"/>
+    <schema id="7" name="world"/>
+    <table id="8" parent="1" name="aes"/>
+    <table id="9" parent="1" name="des"/>
+    <table id="10" parent="1" name="encryptrelation"/>
+    <table id="11" parent="1" name="encrypttype"/>
+    <table id="12" parent="1" name="file"/>
+    <table id="13" parent="1" name="md5"/>
+    <table id="14" parent="1" name="rsa"/>
+    <table id="15" parent="1" name="session"/>
+    <table id="16" parent="1" name="user"/>
+    <table id="17" parent="1" name="encryptfrequency"/>
+    <table id="18" parent="1" name="favoritetypedataset"/>
+    <column id="19" parent="8" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="20" parent="8" name="RelationID">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="21" parent="8" name="AESKey">
+      <mandatory>1</mandatory>
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <index id="22" parent="8" name="ID_EncryptRelation_AES_idx">
+      <columns>RelationID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="23" parent="8" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="24" parent="8" name="ID_EncryptRelation_AES">
+      <columns>RelationID</columns>
+      <ref-key>~.encryptrelation.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="25" parent="9" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="26" parent="9" name="DESKey">
+      <mandatory>1</mandatory>
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="27" parent="9" name="RelationID">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="28" parent="9" name="Layer">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="29" parent="9" name="ID_EncryptRelation__idx">
+      <columns>RelationID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="30" parent="9" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="31" parent="9" name="ID_EncryptRelation_DES">
+      <columns>RelationID</columns>
+      <ref-key>~.encryptrelation.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="32" parent="10" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="33" parent="10" name="FileID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="34" parent="10" name="TypeID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="35" parent="10" name="EncryptTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <index id="36" parent="10" name="ID_EncryptType_FileEncrypt_idx">
+      <columns>TypeID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="37" parent="10" name="ID_FileList_FileEncrypt_idx">
+      <columns>FileID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="38" parent="10" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="39" parent="10" name="ID_File_EncryptRelation">
+      <columns>FileID</columns>
+      <ref-key>~.file.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="40" parent="10" name="ID_EncryptType_EncryptRelation">
+      <columns>TypeID</columns>
+      <ref-key>~.encrypttype.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="41" parent="11" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="42" parent="11" name="Name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="43" parent="11" name="Description">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <index id="44" parent="11" name="TypeID">
+      <columns>ID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="45" parent="11" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="46" parent="12" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="47" parent="12" name="Name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="48" parent="12" name="Size">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="49" parent="12" name="UploadTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="50" parent="12" name="LastDownloadTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="51" parent="12" name="LastEncryptTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="52" parent="12" name="Path">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="53" parent="12" name="Owner">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="54" parent="12" name="FileID">
+      <columns>ID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="55" parent="12" name="ID_idx">
+      <columns>Owner</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="56" parent="12" name="ID_UNIQUE">
+      <columns>ID</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="57" parent="12" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <key id="58" parent="12" name="ID_UNIQUE">
+      <columns>ID</columns>
+      <underlying-index>ID_UNIQUE</underlying-index>
+    </key>
+    <foreign-key id="59" parent="12" name="ID_User_File">
+      <columns>Owner</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="60" parent="13" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="61" parent="13" name="RelationID">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="62" parent="13" name="Sign">
+      <mandatory>1</mandatory>
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <index id="63" parent="13" name="ID_EncryptRelation_MD5_idx">
+      <columns>RelationID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="64" parent="13" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="65" parent="13" name="ID_EncryptRelation_MD5">
+      <columns>RelationID</columns>
+      <ref-key>~.encryptrelation.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="66" parent="14" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="67" parent="14" name="RelationID">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="68" parent="14" name="PublicKey">
+      <mandatory>1</mandatory>
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="69" parent="14" name="PrivateKey">
+      <mandatory>1</mandatory>
+      <data-type>longtext|0</data-type>
+    </column>
+    <index id="70" parent="14" name="ID_EncryptRelation_RSA_idx">
+      <columns>RelationID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="71" parent="14" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="72" parent="14" name="ID_EncryptRelation_RSA">
+      <columns>RelationID</columns>
+      <ref-key>~.encryptrelation.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="73" parent="15" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="74" parent="15" name="UserID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="75" parent="15" name="Time">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="76" parent="15" name="ID_User_Session_idx">
+      <columns>UserID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="77" parent="15" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="78" parent="15" name="ID_User_Session">
+      <columns>UserID</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="79" parent="16" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="80" parent="16" name="Name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(16)|0</data-type>
+    </column>
+    <column id="81" parent="16" name="Password">
+      <mandatory>1</mandatory>
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="82" parent="16" name="RegisterTime">
+      <mandatory>1</mandatory>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="83" parent="16" name="Sex">
+      <data-type>tinyint(1)|0</data-type>
+    </column>
+    <column id="84" parent="16" name="Tel">
+      <data-type>int(20)|0</data-type>
+    </column>
+    <column id="85" parent="16" name="QQ">
+      <data-type>int(15)|0</data-type>
+    </column>
+    <column id="86" parent="16" name="Email">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="87" parent="16" name="Permission">
+      <data-type>int(2)|0</data-type>
+    </column>
+    <key id="88" parent="16" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="89" parent="17" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="90" parent="17" name="Owner">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="91" parent="17" name="TypeID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="92" parent="17" name="DayFrequency">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="93" parent="17" name="WeekFrequency">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="94" parent="17" name="MonthFrequency">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="95" parent="17" name="YearFrequency">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="96" parent="17" name="Priority">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <index id="97" parent="17" name="ID_EncryptType_EncryptFrequency_idx">
+      <columns>TypeID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="98" parent="17" name="ID_User_EncryptFrequency_idx">
+      <columns>Owner</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="99" parent="17" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="100" parent="17" name="ID_User_EncryptFrequency">
+      <columns>Owner</columns>
+      <ref-key>~.user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="101" parent="17" name="ID_EncryptType_EncryptFrequency">
+      <columns>TypeID</columns>
+      <ref-key>~.encrypttype.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="102" parent="18" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="103" parent="18" name="DayScale">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="104" parent="18" name="WeekScale">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="105" parent="18" name="MonthScale">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="106" parent="18" name="YearScale">
+      <mandatory>1</mandatory>
+      <data-type>double|0</data-type>
+    </column>
+    <column id="107" parent="18" name="Rate">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="108" parent="18" name="Owner">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="109" parent="18" name="TypeID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="110" parent="18" name="IsTrain">
+      <data-type>tinyint(1)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="111" parent="18" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

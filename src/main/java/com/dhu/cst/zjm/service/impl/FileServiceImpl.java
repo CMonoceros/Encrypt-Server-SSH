@@ -29,7 +29,8 @@ public class FileServiceImpl extends BaseDaoSupportImpl<FileEntity> implements B
     }
 
     public FileBaseEntity findFileById(int id) {
-        return (FileBaseEntity) getSession().createQuery("FROM FileBaseEntity WHERE id=?")
+        return (FileBaseEntity) getSession().createQuery(
+                "FROM FileBaseEntity WHERE id=?")
                 .setParameter(0, id)
                 .setCacheable(true)
                 .uniqueResult();
@@ -55,10 +56,38 @@ public class FileServiceImpl extends BaseDaoSupportImpl<FileEntity> implements B
         fileEntity.setUploadTime(new Timestamp(System.currentTimeMillis()));
         try {
             save(fileEntity);
-            return findFileByNameAndOwner(name, owner);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+        return findFileByNameAndOwner(name, owner);
+    }
+
+    @Override
+    public FileBaseEntity updateFileEncryptTime(int id) {
+        FileBaseEntity fileBaseEntity = findFileById(id);
+        if (fileBaseEntity == null) {
+            return null;
+        } else {
+            getSession().createQuery("update FileEntity f set f.lastEncryptTime=? where f.id=?")
+                    .setParameter(0,new Timestamp(System.currentTimeMillis()))
+                    .setParameter(1,id)
+                    .executeUpdate();
+            return findFileById(id);
+        }
+    }
+
+    @Override
+    public FileBaseEntity updateFileDownloadTime(int id) {
+        FileBaseEntity fileBaseEntity = findFileById(id);
+        if (fileBaseEntity == null) {
+            return null;
+        } else {
+            getSession().createQuery("update FileEntity f set f.lastDownloadTime=? where f.id=?")
+                    .setParameter(0,new Timestamp(System.currentTimeMillis()))
+                    .setParameter(1,id)
+                    .executeUpdate();
+            return findFileById(id);
         }
     }
 

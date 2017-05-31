@@ -52,11 +52,11 @@ public class UserServiceImpl extends BaseDaoSupportImpl<UserEntity> implements
         userEntity.setRegisterTime(new Timestamp(System.currentTimeMillis()));
         try {
             save(userEntity);
-            return findUserByNameAndPwd(name, password);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return findUserByNameAndPwd(name, password);
     }
 
     @Override

@@ -12,7 +12,7 @@
         <property name="time">
             <column name="Time" sql-type="int(11)"/>
         </property>
-        <many-to-one name="userByUserID" class="com.dhu.cst.zjm.entity.UserEntity">
+        <many-to-one name="userByUserID" class="com.dhu.cst.zjm.entity.UserEntity" property-ref="sessionById">
             <column name="UserID" sql-type="int(11)"/>
         </many-to-one>
     </class>

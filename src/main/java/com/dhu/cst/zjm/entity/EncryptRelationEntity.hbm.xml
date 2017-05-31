@@ -8,10 +8,13 @@
         <id name="id">
             <column name="ID" sql-type="int(11)" unique="true"/>
         </id>
-        <many-to-one name="fileByFileId" class="com.dhu.cst.zjm.entity.FileEntity">
+        <property name="encryptTime">
+            <column name="EncryptTime" sql-type="datetime" not-null="true"/>
+        </property>
+        <many-to-one name="fileByFileId" class="com.dhu.cst.zjm.entity.FileEntity" property-ref="encryptRelationsById">
             <column name="FileID" sql-type="int(11)"/>
         </many-to-one>
-        <many-to-one name="encryptTypeByTypeId" class="com.dhu.cst.zjm.entity.EncryptTypeEntity">
+        <many-to-one name="encryptTypeByTypeId" class="com.dhu.cst.zjm.entity.EncryptTypeEntity" property-ref="encryptRelationsById">
             <column name="TypeID" sql-type="int(11)"/>
         </many-to-one>
         <set name="aesById" inverse="true">

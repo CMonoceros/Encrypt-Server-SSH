@@ -21,13 +21,13 @@
         <action name="register" class="userAction" method="register">
         </action>
 
-        <action name="uploadFile" class="fileUploadAction" >
+        <action name="uploadFile" class="fileUploadAction">
             <interceptor-ref name="fileUpload">
             </interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
 
-        <action name="downloadFile" class="fileDownloadAction" >
+        <action name="downloadFile" class="fileDownloadAction">
             <result name="success" type="stream">
                 <param name="contentType">application/octet-stream</param>
                 <param name="inputName">downloadFile</param>
@@ -43,9 +43,14 @@
         <action name="getEncryptType" class="encryptTypeAction" method="getEncryptType">
         </action>
 
-        <action name="encryptFile" class="encryptRelationAction" method="encryptFile">
+        <action name="getEncryptTypeByOwner" class="encryptTypeAction" method="getEncryptTypeByOwner">
         </action>
 
+        <action name="setEncryptTypeRate" class="encryptTypeAction" method="setEncryptTypeRate">
+        </action>
+
+        <action name="encryptFile" class="encryptRelationAction" method="encryptFile">
+        </action>
 
 
     </package>

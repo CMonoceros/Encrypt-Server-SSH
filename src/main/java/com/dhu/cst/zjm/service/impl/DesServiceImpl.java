@@ -25,18 +25,49 @@ public class DesServiceImpl extends BaseDaoSupportImpl<DesEntity> implements Bas
 
     @Override
     public DesBaseEntity saveDesByRelationAndKeyAndLayer(int relationId, int layer, String key) {
-        EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
-        encryptRelationEntity.setId(relationId);
-        DesEntity desEntity = new DesEntity();
-        desEntity.setDesKey(key);
-        desEntity.setLayer(layer);
-        desEntity.setEncryptRelationByRelationId(encryptRelationEntity);
-        try {
-            save(desEntity);
+        DesBaseEntity desBaseEntity = findDesByRelationAndLayer(relationId, layer);
+        if (desBaseEntity == null) {
+            EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
+            encryptRelationEntity.setId(relationId);
+            DesEntity desEntity = new DesEntity();
+            desEntity.setDesKey(key);
+            desEntity.setLayer(layer);
+            desEntity.setEncryptRelationByRelationId(encryptRelationEntity);
+            try {
+                save(desEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
             return findDesByRelationAndLayer(relationId, layer);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            desBaseEntity = updateDesByRelationAndKeyAndLayer(desBaseEntity.getId(), relationId, layer, key);
+            return desBaseEntity;
         }
-        return null;
+
+    }
+
+    @Override
+    public DesBaseEntity updateDesByRelationAndKeyAndLayer(int id, int relationId, int layer, String key) {
+        DesBaseEntity desBaseEntity = findDesByRelationAndLayer(relationId, layer);
+        if (desBaseEntity == null) {
+            desBaseEntity = saveDesByRelationAndKeyAndLayer(relationId, layer, key);
+            return desBaseEntity;
+        } else {
+            EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
+            encryptRelationEntity.setId(relationId);
+            DesEntity desEntity = new DesEntity();
+            desEntity.setId(id);
+            desEntity.setDesKey(key);
+            desEntity.setLayer(layer);
+            desEntity.setEncryptRelationByRelationId(encryptRelationEntity);
+            try {
+                update(desEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+            return findDesByRelationAndLayer(relationId, layer);
+        }
     }
 }

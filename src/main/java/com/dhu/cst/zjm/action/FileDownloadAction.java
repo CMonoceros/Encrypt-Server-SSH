@@ -43,6 +43,7 @@ public class FileDownloadAction extends BaseAction<FileEntity> {
             String[] s = fileBaseEntity.getName().split("\\.");
             path = zipPath + fileBaseEntity.getOwner() + "/" + s[0] + ".zip";
             ServletActionContext.getResponse().setContentLength((int) new File(path).length());
+            fileService.updateFileDownloadTime(Integer.parseInt(idString));
             return SUCCESS;
         } else {
             return null;

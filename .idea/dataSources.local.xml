@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - encrypt@115.159.73.148" uuid="214d5455-1f20-4826-864f-fafb13b8e50f">
-      <database-info product="MySQL" version="5.1.73" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
-        <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>`</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>zjm</user-name>
-      <resolve-scope>encrypt:</resolve-scope>
-    </data-source>
     <data-source name="hibernate.cfg.xml/Hibernate" uuid="84d4d922-c68e-4a47-8f9a-073dfd0b6be9">
-      <database-info product="MySQL" version="5.1.73" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <database-info product="MySQL" version="5.7.17-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
-      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
-      <user-name>zjm</user-name>
-      <user-password>dfd0dfc2dfcbdfc4dfcddfd3dfcbdfd2dfc3dfc4df9bdf9bdf9adf9f</user-password>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <user-name>root</user-name>
+      <user-password>dfd0dfc2dfcbdfc4dfcddfc0dfdfdfc4dfc7dfc3dfc4dfcddf9bdf93df98df9b</user-password>
       <resolve-scope>encrypt:</resolve-scope>
     </data-source>
     <data-source name="dataSource" uuid="af5cc786-f6b6-4327-9762-61e77756274e">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
-      <first-sync>true</first-sync>
-      <user-name>zjm</user-name>
-      <user-password>dfd0dfc2dfcbdfc4dfcddfd3dfcbdfd2dfc3dfc4df9bdf9bdf9adf9f</user-password>
+      <database-info product="MySQL" version="5.7.17-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <user-name>root</user-name>
+      <user-password>dfd0dfc2dfcbdfc4dfcddfc0dfdfdfc4dfc7dfc3dfc4dfcddf9bdf93df98df9b</user-password>
+      <resolve-scope>encrypt:</resolve-scope>
+    </data-source>
+    <data-source name="MySQL - encrypt@localhost" uuid="0981071b-509a-4818-9f1a-3d7cb8c61756">
+      <database-info product="MySQL" version="5.7.17-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <resolve-scope>encrypt:</resolve-scope>
+    </data-source>
+    <data-source name="com.mysql.jdbc.Driver - jdbc:mysql://localhost:3306/encrypt" uuid="6d95f0d9-c96a-4ed2-96e0-d9d85648485c">
+      <database-info product="MySQL" version="5.7.17-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <resolve-scope>encrypt:</resolve-scope>
     </data-source>
   </component>
 </project>

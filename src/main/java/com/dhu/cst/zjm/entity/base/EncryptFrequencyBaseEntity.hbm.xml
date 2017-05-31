@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.dhu.cst.zjm.entity.base.EncryptFrequencyBaseEntity" table="EncryptFrequency" schema="encrypt">
+        <id name="id">
+            <column name="ID" sql-type="int(11)" unique="true"/>
+        </id>
+        <property name="owner">
+            <column name="Owner" sql-type="int(11)"/>
+        </property>
+        <property name="typeId">
+            <column name="TypeID" sql-type="int(11)"/>
+        </property>
+        <property name="dayFrequency">
+            <column name="DayFrequency" sql-type="int(11)"/>
+        </property>
+        <property name="weekFrequency">
+            <column name="WeekFrequency" sql-type="int(11)"/>
+        </property>
+        <property name="monthFrequency">
+            <column name="MonthFrequency" sql-type="int(11)"/>
+        </property>
+        <property name="yearFrequency">
+            <column name="YearFrequency" sql-type="int(11)"/>
+        </property>
+        <property name="priority">
+            <column name="Priority" sql-type="int(11)"/>
+        </property>
+    </class>
+</hibernate-mapping>

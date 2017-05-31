@@ -11,4 +11,6 @@ public interface BaseEncryptRelationService extends BaseDaoSupport<EncryptRelati
     EncryptRelationBaseEntity findIDByFileAndType(int fileID, int typeID);
 
     EncryptRelationBaseEntity saveEncryptRelation(int fileID, int typeID);
+
+    EncryptRelationBaseEntity updateEncryptRelation(int id,int fileID, int typeID);
 }

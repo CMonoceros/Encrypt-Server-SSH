@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.dhu.cst.zjm.entity.EncryptTypeEntity" table="EncryptType" schema="encrypt">
@@ -12,13 +12,19 @@
             <column name="Name" sql-type="varchar(45)" length="45"/>
         </property>
         <property name="description">
-            <column name="Description" sql-type="mediumtext" not-null="true"/>
+            <column name="Description" sql-type="mediumtext"/>
         </property>
         <set name="encryptRelationsById" inverse="true">
             <key>
                 <column name="TypeID"/>
             </key>
             <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.EncryptRelationEntity"/>
+        </set>
+        <set name="encryptFrequencyById" inverse="true">
+            <key>
+                <column name="TypeID"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.EncryptFrequencyEntity"/>
         </set>
     </class>
 </hibernate-mapping>

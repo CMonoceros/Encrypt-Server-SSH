@@ -11,4 +11,6 @@ public interface BaseDesService extends BaseDaoSupport<DesEntity> {
     DesBaseEntity findDesByRelationAndLayer(int relationId,int layer);
 
     DesBaseEntity saveDesByRelationAndKeyAndLayer(int relationId,int layer,String key);
+
+    DesBaseEntity updateDesByRelationAndKeyAndLayer(int id,int relationId,int layer,String key);
 }

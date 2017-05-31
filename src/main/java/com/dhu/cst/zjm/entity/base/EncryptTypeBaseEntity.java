@@ -13,7 +13,7 @@ public class EncryptTypeBaseEntity {
     private String description;
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID", nullable = false,unique=true)
     public int getId() {
         return id;
     }

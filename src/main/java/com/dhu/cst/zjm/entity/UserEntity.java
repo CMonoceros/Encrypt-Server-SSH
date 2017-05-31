@@ -23,6 +23,7 @@ public class UserEntity {
     private Integer permission;
     private Collection<FileEntity> filesById;
     private Collection<SessionEntity> sessionById;
+    private Collection<EncryptFrequencyEntity> frequencyById;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -166,5 +167,14 @@ public class UserEntity {
 
     public void setSessionById(Collection<SessionEntity> sessionById) {
         this.sessionById = sessionById;
+    }
+
+    @OneToMany(mappedBy = "userByFrequencyOwner")
+    public Collection<EncryptFrequencyEntity> getFrequencyById() {
+        return frequencyById;
+    }
+
+    public void setFrequencyById(Collection<EncryptFrequencyEntity> frequencyById) {
+        this.frequencyById = frequencyById;
     }
 }

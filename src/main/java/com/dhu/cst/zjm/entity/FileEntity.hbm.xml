@@ -26,7 +26,7 @@
         <property name="path">
             <column name="Path" sql-type="varchar(100)" length="100"/>
         </property>
-        <many-to-one name="userByOwner" class="com.dhu.cst.zjm.entity.UserEntity">
+        <many-to-one name="userByOwner" class="com.dhu.cst.zjm.entity.UserEntity" property-ref="filesById">
             <column name="Owner" sql-type="int(11)"/>
         </many-to-one>
         <set name="encryptRelationsById" inverse="true">

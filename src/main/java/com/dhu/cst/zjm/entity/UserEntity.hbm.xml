@@ -44,5 +44,11 @@
             </key>
             <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.SessionEntity"/>
         </set>
+        <set name="frequencyById" inverse="true">
+            <key>
+                <column name="Owner"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.dhu.cst.zjm.entity.EncryptFrequencyEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

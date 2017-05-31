@@ -11,7 +11,7 @@
         <property name="sign">
             <column name="Sign" sql-type="mediumtext"/>
         </property>
-        <many-to-one name="encryptRelationByRelationId" class="com.dhu.cst.zjm.entity.EncryptRelationEntity">
+        <many-to-one name="encryptRelationByRelationId" class="com.dhu.cst.zjm.entity.EncryptRelationEntity" property-ref="md5sById">
             <column name="RelationID" sql-type="int(11)" not-null="true"/>
         </many-to-one>
     </class>

@@ -1,6 +1,7 @@
 package com.dhu.cst.zjm.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 /**
@@ -16,16 +17,27 @@ public class EncryptRelationEntity {
     private EncryptTypeEntity encryptTypeByTypeId;
     private Collection<Md5Entity> md5sById;
     private Collection<RsaEntity> rsasById;
+    private Timestamp encryptTime;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false ,unique=true)
+    @Column(name = "ID", nullable = false, unique = true)
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "EncryptTime", nullable = true)
+    public Timestamp getEncryptTime() {
+        return encryptTime;
+    }
+
+    public void setEncryptTime(Timestamp encryptTime) {
+        this.encryptTime = encryptTime;
     }
 
     @Override
@@ -36,6 +48,8 @@ public class EncryptRelationEntity {
         EncryptRelationEntity that = (EncryptRelationEntity) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (encryptTime != null ? !encryptTime.equals(that.encryptTime) : that.encryptTime != null)
+            return false;
 
         return true;
     }
@@ -43,6 +57,7 @@ public class EncryptRelationEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (encryptTime != null ? encryptTime.hashCode() : 0);
         return result;
     }
 

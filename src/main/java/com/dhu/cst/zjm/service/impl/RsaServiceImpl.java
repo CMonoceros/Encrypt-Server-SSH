@@ -23,18 +23,48 @@ public class RsaServiceImpl extends BaseDaoSupportImpl<RsaEntity> implements Bas
 
     @Override
     public RsaBaseEntity saveRsaByRelationAndKey(int relationId, String publicKey, String privateKey) {
-        EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
-        encryptRelationEntity.setId(relationId);
-        RsaEntity rsaEntity = new RsaEntity();
-        rsaEntity.setEncryptRelationByRelationId(encryptRelationEntity);
-        rsaEntity.setPublicKey(publicKey);
-        rsaEntity.setPrivateKey(privateKey);
-        try {
-            save(rsaEntity);
+        RsaBaseEntity rsaBaseEntity = findRsaByRelation(relationId);
+        if (rsaBaseEntity == null) {
+            EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
+            encryptRelationEntity.setId(relationId);
+            RsaEntity rsaEntity = new RsaEntity();
+            rsaEntity.setEncryptRelationByRelationId(encryptRelationEntity);
+            rsaEntity.setPublicKey(publicKey);
+            rsaEntity.setPrivateKey(privateKey);
+            try {
+                save(rsaEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
             return findRsaByRelation(relationId);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            rsaBaseEntity = updateRsaByRelationAndKey(rsaBaseEntity.getId(), relationId, publicKey, privateKey);
+            return rsaBaseEntity;
         }
-        return null;
+    }
+
+    @Override
+    public RsaBaseEntity updateRsaByRelationAndKey(int id, int relationId, String publicKey, String privateKey) {
+        RsaBaseEntity rsaBaseEntity = findRsaByRelation(relationId);
+        if (rsaBaseEntity == null) {
+            rsaBaseEntity = saveRsaByRelationAndKey(relationId, publicKey, privateKey);
+            return rsaBaseEntity;
+        } else {
+            EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
+            encryptRelationEntity.setId(relationId);
+            RsaEntity rsaEntity = new RsaEntity();
+            rsaEntity.setId(id);
+            rsaEntity.setEncryptRelationByRelationId(encryptRelationEntity);
+            rsaEntity.setPublicKey(publicKey);
+            rsaEntity.setPrivateKey(privateKey);
+            try {
+                update(rsaEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+            return findRsaByRelation(relationId);
+        }
     }
 }

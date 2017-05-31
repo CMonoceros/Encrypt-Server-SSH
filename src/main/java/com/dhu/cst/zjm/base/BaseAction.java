@@ -3,6 +3,7 @@ package com.dhu.cst.zjm.base;
 /**
  * Created by zjm on 2017/3/9.
  */
+
 import com.dhu.cst.zjm.service.*;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -59,5 +60,9 @@ public abstract class BaseAction<T> extends ActionSupport implements
     protected BaseMd5Service md5Service;
     @Resource
     protected BaseAesService aesService;
+    @Resource
+    protected BaseEncryptFrequencyService encryptFrequencyService;
+    @Resource
+    protected BaseFavoriteTypeDataSetService favoriteTypeDataSetService;
 
 }

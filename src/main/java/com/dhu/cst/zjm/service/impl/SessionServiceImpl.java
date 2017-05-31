@@ -27,11 +27,11 @@ public class SessionServiceImpl extends BaseDaoSupportImpl<SessionEntity> implem
         sessionEntity.setTime(time);
         try {
             save(sessionEntity);
-            return getSession(userId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return getSession(userId);
     }
 
     @Override

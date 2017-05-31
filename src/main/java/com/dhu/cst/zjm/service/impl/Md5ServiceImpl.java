@@ -23,17 +23,46 @@ public class Md5ServiceImpl extends BaseDaoSupportImpl<Md5Entity> implements Bas
 
     @Override
     public Md5BaseEntity saveMd5ByRelationAndSign(int relationId, String sign) {
-        EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
-        encryptRelationEntity.setId(relationId);
-        Md5Entity md5Entity = new Md5Entity();
-        md5Entity.setSign(sign);
-        md5Entity.setEncryptRelationByRelationId(encryptRelationEntity);
-        try {
-            save(md5Entity);
+        Md5BaseEntity md5BaseEntity = findMd5ByRelation(relationId);
+        if (md5BaseEntity == null) {
+            EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
+            encryptRelationEntity.setId(relationId);
+            Md5Entity md5Entity = new Md5Entity();
+            md5Entity.setSign(sign);
+            md5Entity.setEncryptRelationByRelationId(encryptRelationEntity);
+            try {
+                save(md5Entity);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
             return findMd5ByRelation(relationId);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            md5BaseEntity = updateMd5ByRelationAndSign(md5BaseEntity.getId(), relationId, sign);
+            return md5BaseEntity;
         }
-        return null;
+    }
+
+    @Override
+    public Md5BaseEntity updateMd5ByRelationAndSign(int id, int relationId, String sign) {
+        Md5BaseEntity md5BaseEntity = findMd5ByRelation(relationId);
+        if (md5BaseEntity == null) {
+            md5BaseEntity = saveMd5ByRelationAndSign(relationId, sign);
+            return md5BaseEntity;
+        } else {
+            EncryptRelationEntity encryptRelationEntity = new EncryptRelationEntity();
+            encryptRelationEntity.setId(relationId);
+            Md5Entity md5Entity = new Md5Entity();
+            md5Entity.setId(id);
+            md5Entity.setSign(sign);
+            md5Entity.setEncryptRelationByRelationId(encryptRelationEntity);
+            try {
+                update(md5Entity);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+            return findMd5ByRelation(relationId);
+        }
     }
 }

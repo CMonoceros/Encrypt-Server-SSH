@@ -2,9 +2,7 @@ package com.dhu.cst.zjm.action;
 
 import com.dhu.cst.zjm.base.BaseAction;
 import com.dhu.cst.zjm.entity.EncryptRelationEntity;
-import com.dhu.cst.zjm.entity.base.DesBaseEntity;
-import com.dhu.cst.zjm.entity.base.EncryptRelationBaseEntity;
-import com.dhu.cst.zjm.entity.base.FileBaseEntity;
+import com.dhu.cst.zjm.entity.base.*;
 import com.dhu.cst.zjm.util.FileUtil;
 import com.dhu.cst.zjm.util.algorithm.des.DesUtil;
 import com.dhu.cst.zjm.util.algorithm.md5.Md5Util;
@@ -12,6 +10,8 @@ import com.dhu.cst.zjm.util.algorithm.rsa.RSASignature;
 import com.dhu.cst.zjm.util.algorithm.rsa.RSAUtil;
 import com.dhu.cst.zjm.util.JsonUtil;
 import com.dhu.cst.zjm.util.ZipUtil;
+import com.dhu.cst.zjm.util.meachinelearning.FavoriteType;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,6 +20,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,10 +51,9 @@ public class EncryptRelationAction extends BaseAction<EncryptRelationEntity> {
             JsonUtil.toJson(ServletActionContext.getResponse(), null);
         } else if (encryptTypeService.findEncryptTypeById(typeID) == null) {
             JsonUtil.toJson(ServletActionContext.getResponse(), null);
-        } else if (encryptRelationService.findIDByFileAndType(fileID, typeID) != null) {
-            JsonUtil.toJson(ServletActionContext.getResponse(), null);
         } else {
-            EncryptRelationBaseEntity encryptRelationBaseEntity = encryptRelationService.saveEncryptRelation(fileID, typeID);
+            EncryptRelationBaseEntity encryptRelationBaseEntity =
+                    encryptRelationService.saveEncryptRelation(fileID, typeID);
             if (encryptRelationBaseEntity != null) {
                 switch (typeID) {
                     case 1:
@@ -66,13 +67,48 @@ public class EncryptRelationAction extends BaseAction<EncryptRelationEntity> {
                             baseEncryptType(file, encryptRelationBaseEntity);
                         }
                         break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
                 }
+                predictFavoriteType(fileID, typeID, file.getOwner());
                 JsonUtil.toJson(ServletActionContext.getResponse(), encryptRelationBaseEntity);
             } else {
                 JsonUtil.toJson(ServletActionContext.getResponse(), null);
             }
         }
         return null;
+    }
+
+    private void predictFavoriteType(int file, int type, int user) {
+        final int fileID = file;
+        final int typeID = type;
+        final int userID = user;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (fileService.updateFileEncryptTime(fileID) != null
+                        && encryptFrequencyService.saveEncryptFrequency(userID, typeID) != null) {
+                    List<EncryptFrequencyBaseEntity> frequencyBaseEntityList =
+                            encryptFrequencyService.findEncryptFrequencyByOwner(userID);
+                    if (frequencyBaseEntityList != null) {
+                        Map<Integer, List<Double>> freqMap = FavoriteType.prepareFreqMap(frequencyBaseEntityList);
+                        favoriteTypeDataSetService.saveFavoriteTypeDataByMap(freqMap, userID);
+                        List<Integer> res = FavoriteType.predictFavoriteTypeList(freqMap, userID);
+                        if (res != null) {
+                            int priority = 1;
+                            for (Integer i : res) {
+                                encryptFrequencyService.updateEncryptFrequencySetPriority(
+                                        i, userID, priority++);
+                            }
+                        }
+                    }
+                }
+            }
+        }).run();
     }
 
     private void baseEncryptType(FileBaseEntity file, EncryptRelationBaseEntity relation) throws Exception {

@@ -13,6 +13,7 @@ public class EncryptTypeEntity {
     private String name;
     private String description;
     private Collection<EncryptRelationEntity> encryptRelationsById;
+    private Collection<EncryptFrequencyEntity> encryptFrequencyById;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -73,5 +74,14 @@ public class EncryptTypeEntity {
 
     public void setEncryptRelationsById(Collection<EncryptRelationEntity> encryptRelationsById) {
         this.encryptRelationsById = encryptRelationsById;
+    }
+
+    @OneToMany(mappedBy = "encryptTypeByFrequencyTypeId")
+    public Collection<EncryptFrequencyEntity> getEncryptFrequencyById() {
+        return encryptFrequencyById;
+    }
+
+    public void setEncryptFrequencyById(Collection<EncryptFrequencyEntity> encryptFrequencyById) {
+        this.encryptFrequencyById = encryptFrequencyById;
     }
 }

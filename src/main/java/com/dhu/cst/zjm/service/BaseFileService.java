@@ -18,5 +18,9 @@ public interface BaseFileService extends BaseDaoSupport<FileEntity>{
 
     FileBaseEntity saveFile(String name,String size,String path,int owner);
 
+    FileBaseEntity updateFileEncryptTime(int id);
+
+    FileBaseEntity updateFileDownloadTime(int id);
+
     List<FileBaseEntity> findFileListByPaper(int id,int page,int rows);
 }
